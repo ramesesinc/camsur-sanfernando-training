@@ -3,7 +3,9 @@
 .DS_Store
 .osiris_pid
 .shutdown_pid
+.terminal
 *.lnk
 *.mp4
-_custom
 Thumbs.db
+_custom
+/client/**/osiris2

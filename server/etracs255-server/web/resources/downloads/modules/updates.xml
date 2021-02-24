@@ -42,8 +42,8 @@ waterworks.app.context=enterprise
   <module version="2.50" file="shared/rameses-client-report.jar"  />
   <module version="2.50" file="shared/rameses-rules-mgmt.jar"  />
   <module version="2.50" file="shared/rameses-workflow-mgmt.jar"  />
-  <module version="2.50" file="shared/rameses-enterprise.jar"  />
-  <module version="2.50" file="shared/rameses-enterprise-admin.jar"  />
+  <module version="2.51" file="shared/rameses-enterprise.jar"  />
+  <module version="2.51" file="shared/rameses-enterprise-admin.jar"  />
   <module version="2.50" file="shared/rameses-enterprise-admin-plugin.jar"  />
   <module version="2.50" file="shared/rameses-enterprise-financial.jar"  />
   <module version="2.50" file="shared/rameses-client-notification2.jar"  />
