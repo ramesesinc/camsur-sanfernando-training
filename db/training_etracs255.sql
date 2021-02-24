@@ -18289,3 +18289,9 @@ USE `training_etracs255`;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-02-23 11:55:17
+
+
+delete from sys_usergroup_member where usergroup_objid like 'water%' 
+;
+delete from sys_usergroup where objid like 'water%' 
+;
