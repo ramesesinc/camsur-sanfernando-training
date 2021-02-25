@@ -2968,3 +2968,7 @@ USE `training_waterworks`;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-02-23 11:02:41
+
+
+ALTER TABLE sys_email_template ADD `subject` VARCHAR(255) NULL
+;
