@@ -86,7 +86,7 @@ waterworks.app.context=enterprise
 
   <module version="1.40" file="waterworks/rameses-gov-etracs-waterworks-collection.jar" />
   <module version="2.50" file="waterworks/rameses-gov-etracs-waterworks2-shared.jar" />
-  <module version="1.17" file="waterworks/rameses-gov-etracs-waterworks2.jar"  />
+  <module version="1.18" file="waterworks/rameses-gov-etracs-waterworks2.jar"  />
   <module version="1.05" file="waterworks/rameses-gov-etracs-waterworks2-report.jar"  />
 </modules>
 </app>
