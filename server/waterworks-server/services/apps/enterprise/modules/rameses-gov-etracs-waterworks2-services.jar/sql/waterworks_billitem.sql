@@ -56,7 +56,8 @@ FROM
       wbi.year,
       wbi.month,
       wbi.itemid,
-      wbi.amount
+      wbi.amount,
+      wbi.txndate
       FROM waterworks_billitem wbi 
       INNER JOIN waterworks_bill wb ON wbi.billid = wb.objid
       WHERE wb.acctid = $P{acctid}
@@ -67,7 +68,8 @@ FROM
       wbi.year,
       wbi.month,
       wbi.itemid,
-      wbi.amount 
+      wbi.amount,
+      wbi.txndate 
       FROM waterworks_billitem wbi 
       INNER JOIN waterworks_bill wb ON wbi.refbillid = wb.objid
       WHERE wb.acctid = $P{acctid}
@@ -78,19 +80,20 @@ FROM
   INNER JOIN waterworks_itemaccount ia ON c.itemid = ia.objid
   ORDER BY c.year, c.month, ia.sortorder    
 
-[getBillItemsForPayment]
-SELECT bi.*, b.billyear, b.billmonth  
+[getOpenBillItems]
+SELECT bi.objid, bi.year, bi.month, bi.amount, bi.amtpaid, bi.itemid AS item_objid, ia.sortorder AS item_sortorder  
 FROM waterworks_billitem bi 
 INNER JOIN waterworks_bill b ON bi.billid = b.objid 
-WHERE (bi.amount - bi.amtpaid) > 0
-AND ((b.billyear*12)+b.billmonth) <= ${yearmonth}
+INNER JOIN waterworks_itemaccount ia ON bi.itemid = ia.objid 
+WHERE bi.acctid = $P{acctid}
+AND (bi.amount - bi.amtpaid) > 0
+AND ((b.year*12)+b.month) <= ${yearmonth}
 UNION
-SELECT bi.*, b.billyear, b.billmonth  
+SELECT bi.objid, bi.year, bi.month, bi.amount, bi.amtpaid, bi.itemid AS item_objid, ia.sortorder AS item_sortorder  
 FROM waterworks_billitem bi 
 INNER JOIN waterworks_bill b ON bi.refbillid = b.objid 
-WHERE (bi.amount - bi.amtpaid) > 0
-AND ((b.billyear*12)+b.billmonth) <= ${yearmonth}
-
-
-
+INNER JOIN waterworks_itemaccount ia ON bi.itemid = ia.objid 
+WHERE bi.acctid = $P{acctid}
+AND (bi.amount - bi.amtpaid) > 0
+AND ((b.year*12)+b.month) <= ${yearmonth}
 

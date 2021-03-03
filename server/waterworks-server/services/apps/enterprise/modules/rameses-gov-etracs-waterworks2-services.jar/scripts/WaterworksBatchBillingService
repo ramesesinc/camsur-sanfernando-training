@@ -114,9 +114,7 @@ class WaterworksBatchBillingService {
 					def vv = [acctid: it.objid, year:it.year,month:it.month,scheduleid:it.scheduleid, batchid: o.batchid];
 					vv.billnoformat = o.batchid + "-[%05d]"; 
 					vv.txnmode = "ONLINE";
-					def _bill = billSvc.createBill( vv );
-					//we will immediately create the fixed items if any so we will not get this anymore later.
-					billSvc.updateBillFees( [objid: _bill.objid ] );
+					billSvc.createBill( vv );
 				}
 				catch(ex) {
 					logError( [acctid: it.objid, batchid: o.batchid, action: o.action], ex );
@@ -127,8 +125,7 @@ class WaterworksBatchBillingService {
 			items = billEm.find([batchid: o.batchid]).where("billed=0").select("objid").limit(batch_process_size).list();
 			items?.each{ 
 				try {
-					billSvc.updateBillFees( [objid: it.objid] );
-					billEm.find( [objid: it.objid]).update( [billed:1]);
+					billSvc.addCurrentBillItems( [objid: it.objid] );
 				}
 				catch(ex) {
 					logError( [billid: it.objid, acctid:it.acctid, batchid: o.batchid, action: o.action ], ex );
@@ -167,13 +164,10 @@ class WaterworksBatchBillingService {
 				def vv = [acctid: err.acctid, year:batch.year,month:batch.month, batchid: batch.objid];
 				vv.billnoformat = batch.objid + "-[%05d]"; 
 				vv.txnmode = "ONLINE";
-				def _bill = billSvc.createBill( vv );
-				//we will immediately create the fixed items if any so we will not get this anymore later.
-				billSvc.updateBillFees( [objid: _bill.objid ] );
+				billSvc.createBill( vv );
 			}
 			else if( err.action=="update-bills") {
-				billSvc.updateBillFees( [objid: it.objid] );
-				billEm.find( [objid: it.objid]).update( [billed:1]);
+				billSvc.addCurrentBillItems( [objid: it.objid] );
 			}
 			else if( err.action == "approve-bills") {
 				billSvc.approve( [objid: it.objid] ); 

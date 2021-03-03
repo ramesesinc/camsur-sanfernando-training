@@ -6,9 +6,6 @@ import java.text.*;
 
 class WaterworksMobileSupportService {
 
-	@Service("WaterworksBillingRuleService")
-	def ruleSvc;
-
 	@Service("WaterworksComputationService")
     def compSvc;
 

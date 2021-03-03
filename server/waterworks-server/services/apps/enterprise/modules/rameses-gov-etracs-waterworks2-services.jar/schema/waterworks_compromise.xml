@@ -11,6 +11,7 @@
 		<field name="downpayment" />
 		<field name="downpaymentrate" type="decimal"/>
 		<field name="term" type="integer"/>
+		<field name="numinstallments" type="integer"/>
 		<field name="startduedate" type="date"/>
 	</element>
 </schema>

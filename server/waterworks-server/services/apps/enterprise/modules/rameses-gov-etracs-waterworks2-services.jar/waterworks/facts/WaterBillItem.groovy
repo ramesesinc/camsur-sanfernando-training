@@ -12,8 +12,15 @@ public class WaterBillItem extends BillItem {
 	def recurringfeeid;
 
 	public WaterBillItem(def o) {
-		super(o);
-		if(o.objid) this.objid = o.objid;
+		this.objid = o.objid;
+		//refid is used in payments
+		this.refid = o.objid;
+		this.year = o.year;
+		this.month = o.month;
+		this.billcode = o.item.objid;
+		this.sortorder = o.item.sortorder;
+		this.amount = o.amount - o.amtpaid;
+		this.principal = o.amount;
 	}
 
 	public WaterBillItem() {}
