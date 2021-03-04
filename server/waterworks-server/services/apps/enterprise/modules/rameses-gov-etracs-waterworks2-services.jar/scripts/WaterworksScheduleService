@@ -8,7 +8,7 @@ class WaterworksScheduleService {
 	@Service("RuleExecutorService")
 	def ruleSvc;
 
-	@Service(value="HolidayService", connection="local-enterprise-server")
+	@Service(value="HolidayService", connection="enterprise")
 	def holidaySvc;
 
 	@DataContext("waterworks_billing_period")
